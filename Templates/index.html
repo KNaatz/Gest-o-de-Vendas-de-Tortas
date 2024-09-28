@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestão de Vendas de Tortas</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Gestão de Vendas de Tortas</h1>
+
+    <!-- Formulário para adicionar uma nova venda -->
+    <form action="/add_venda" method="POST">
+        <label for="numero_pedido">Número do Pedido:</label>
+        <input type="text" name="numero_pedido" required>
+
+        <label for="tipo_torta">Tipo de Torta:</label>
+        <input type="text" name="tipo_torta" required>
+        
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade" required>
+
+        <button type="submit">Adicionar Venda</button>
+    </form>
+
+    <!-- Tabela para exibir vendas -->
+    <h2>Vendas Recentes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Número do Pedido</th>
+                <th>Tipo de Torta</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for venda in vendas %}
+            <tr>
+                <td>{{ venda[0] }}</td>
+                <td>{{ venda[1] }}</td>
+                <td>{{ venda[2] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Formulário para atualizar estoque -->
+    <h2>Atualizar Estoque de Ingredientes</h2>
+    <form action="/update_estoque" method="POST">
+        <label for="ingrediente">Ingrediente:</label>
+        <input type="text" name="ingrediente" required>
+        
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade" required>
+
+        <button type="submit">Atualizar Estoque</button>
+    </form>
+
+    <!-- Tabela para exibir estoque -->
+    <h2>Estoque de Ingredientes</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Ingrediente</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in estoque %}
+            <tr>
+                <td>{{ item[0] }}</td>
+                <td>{{ item[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
